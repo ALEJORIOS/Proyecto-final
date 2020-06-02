@@ -52,8 +52,10 @@ def graphics(x,y, DATA):
     xData.place(x = barLimits[0]+120, y = 420)
     yData = ttk.Combobox(root, values = choices)
     yData.place(x = barLimits[0]+120, y = 460)
-    xData.current(0)
-    yData.current(0)
+    if (xData.get() == ""):
+        xData.current(0)
+    if (yData.get() == ""):
+        yData.current(3)
     for i in range(len(DATA[xData.get()])):
         x.append(DATA[xData.get()][i])
     for i in range(len(DATA[yData.get()])):
@@ -61,6 +63,7 @@ def graphics(x,y, DATA):
         
     fig.add_subplot(111).plot(x, y, color = "white", linewidth = 1)
     ax = fig.gca()
+    
     
     ax.set_facecolor(mainColor)
     ax.spines['left'].set_color('white')
@@ -86,8 +89,6 @@ def graphics(x,y, DATA):
     canvas = FigureCanvasTkAgg(fig, master=GraphicFrame)
     canvas.draw()
     canvas.get_tk_widget().pack(side = TOP, fill= BOTH, expand=1)
-
-
 root = Tk()
 
 #Frames
